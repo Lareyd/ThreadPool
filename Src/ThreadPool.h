@@ -43,14 +43,14 @@ namespace Threads
 
 
 	public:
-		uint32_t extensionSize;// 每次扩展线程池时增加的线程数。默认为5。Number of threads to increase when thread pool is extended. Default is 5. 
+		uint32_t extensionSize;// Number of threads to increase when thread pool is extended. Default is 5. 
 
 	public:
-		long double cleanInterval;// 每清除一次多余线程的时间间隔。默认10分钟，以秒为单位。Interval to clean excess threads. Default is 10 minutes, in seconds.
-		long double cleanDuration;// 线程静默时长超过这个时长将被清除。默认10分钟，以秒为单位。Thread has been idle more this would be cleaned from the thread pool. Default is 10 minutes, in seconds.
+		long double cleanInterval;// Interval to clean excess threads. Default is 10 minutes, in seconds.
+		long double cleanDuration;// Thread has been idle more this would be cleaned from the thread pool. Default is 10 minutes, in seconds.
 
 	private:
-		bool valid;// 线程池是否可用。Whether valid.
+		bool valid;// Whether valid.
 
 	private:
 		unordered_map<Thread*, PTHREAD_DATA> data;
@@ -65,24 +65,23 @@ namespace Threads
 		~ThreadPool();
 
 	public:
-		// 初始化。Initialization.
-		// size：初始化线程池含有的线程数。Number of threads to create when initialize.
-		// extensionSize：每次扩展线程池时增加的线程数。Number of threads to increase when thread pool is extended.
-		// cleanInterval：每清除一次多余线程的时间间隔。默认10分钟，以秒为单位。Interval to clean excess threads. Default is 10 minutes, in seconds.
-		// cleanDuration：线程静默时长超过这个时长将被清除。默认10分钟，以秒为单位。Thread has been idle more this would be cleaned from the thread pool. Default is 10 minutes, in seconds.
+		// Initialization.
+		// size：Number of threads to create when initialize.
+		// extensionSize：Number of threads to increase when thread pool is extended.
+		// cleanInterval：Interval to clean excess threads. Default is 10 minutes, in seconds.
+		// cleanDuration：Thread has been idle more this would be cleaned from the thread pool. Default is 10 minutes, in seconds.
 		void Init(uint32_t size = 5, uint32_t extensionSize = 5, long double cleanInterval = 600., long double cleanDuration = 600.);
 
-		// 是否可用。Whether valid.
+		// Whether valid.
 		bool IsValid();
 
-		// 获取一个线程以执行任务。Obtain a thread to execute the action.
-		// action：线程执行的任务。The action that thread executes.
-		// param：任务的参数。// Action parameter.
-		// 若成功，返回执行任务的线程指针。若未初始化，或输入参数不正确，或失败，返回NULL。On success, returns thread pointer. If not initialized, or invalid input, or on failure, returns NULL.
+		// Obtain a thread to execute the action.
+		// action：The action that thread executes.
+		// param：Action parameter.
+		// On success, returns thread pointer. If not initialized, or invalid input, or on failure, returns NULL.
 		Thread* Obtain(Action action, void* param);
 
 	private:
-		// 调用之后线程池将不再可用。Thread pool would not be valid after calling this method.
 		void Clear();
 
 	private:
