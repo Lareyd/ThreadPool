@@ -1,5 +1,5 @@
-ThreadPool threadPool;
-threadPool.Init();
-threadPool.Obtain([](void* param) {
-	cout << "Thread action." << endl;
-	}, NULL);
+ThreadPool threadPool;  
+threadPool.Init();  
+threadPool.Obtain([](void* param) {  
+	cout << "Thread action." << endl;  
+}, NULL);
